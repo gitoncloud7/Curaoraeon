@@ -632,7 +632,7 @@ class Config:
         ""  # Default tags for uploaded videos, separated by comma
     )
     YOUTUBE_UPLOAD_DEFAULT_DESCRIPTION: str = (
-        "Uploaded by AIM"  # Default description for uploaded videos
+        "Uploaded by Drama Cloud Bot"  # Default description for uploaded videos
     )
     YOUTUBE_UPLOAD_DEFAULT_TITLE: str = (
         ""  # Default title template (empty = use filename)

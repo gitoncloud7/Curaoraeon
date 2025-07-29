@@ -3,7 +3,7 @@
 Follow these steps to deploy Drama Cloud Bot to Heroku using Google Colab:
 
 ### 1. Open the Colab Notebook
-- Click on this link to open the deployment notebook: [Deploy to Heroku via Colab](https://colab.research.google.com/github/AeonOrg/Aeon-MLTB/blob/deploy_extended/Deploy_to_Heroku.ipynb)
+- Click on this link to open the deployment notebook: [Deploy to Heroku via Colab](https://colab.research.google.com/github/DramaCloud/DramaCloud-Bot/blob/main/Deploy_to_Heroku.ipynb)
 - Make sure you're signed in to your Google account.
 
 ### 2. Fork and Star the Repository

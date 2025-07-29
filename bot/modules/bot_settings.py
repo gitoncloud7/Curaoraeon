@@ -274,7 +274,7 @@ DEFAULT_VALUES = {
     "YOUTUBE_UPLOAD_DEFAULT_PRIVACY": "unlisted",
     "YOUTUBE_UPLOAD_DEFAULT_CATEGORY": "22",
     "YOUTUBE_UPLOAD_DEFAULT_TAGS": "",
-    "YOUTUBE_UPLOAD_DEFAULT_DESCRIPTION": "Uploaded by AIM",
+    "YOUTUBE_UPLOAD_DEFAULT_DESCRIPTION": "Uploaded by Drama Cloud Bot",
     # Watermark Settings
     "WATERMARK_ENABLED": False,
     "WATERMARK_KEY": "",
@@ -3738,7 +3738,7 @@ These are advanced settings that should only be modified if you understand their
         category = Config.YOUTUBE_UPLOAD_DEFAULT_CATEGORY or "22 (Default)"
         tags = Config.YOUTUBE_UPLOAD_DEFAULT_TAGS or "None (Default)"
         description = (
-            Config.YOUTUBE_UPLOAD_DEFAULT_DESCRIPTION or "Uploaded by AIM (Default)"
+            Config.YOUTUBE_UPLOAD_DEFAULT_DESCRIPTION or "Uploaded by Drama Cloud Bot (Default)"
         )
 
         msg = f"""<b>📺 YouTube General Settings</b> | State: {state}
@@ -13115,7 +13115,7 @@ async def edit_bot_settings(client, query):
         Config.YOUTUBE_UPLOAD_DEFAULT_PRIVACY = "unlisted"
         Config.YOUTUBE_UPLOAD_DEFAULT_CATEGORY = "22"
         Config.YOUTUBE_UPLOAD_DEFAULT_TAGS = ""
-        Config.YOUTUBE_UPLOAD_DEFAULT_DESCRIPTION = "Uploaded by AIM"
+        Config.YOUTUBE_UPLOAD_DEFAULT_DESCRIPTION = "Uploaded by Drama Cloud Bot"
 
         # Update the database
         await database.update_config(
@@ -13123,7 +13123,7 @@ async def edit_bot_settings(client, query):
                 "YOUTUBE_UPLOAD_DEFAULT_PRIVACY": "unlisted",
                 "YOUTUBE_UPLOAD_DEFAULT_CATEGORY": "22",
                 "YOUTUBE_UPLOAD_DEFAULT_TAGS": "",
-                "YOUTUBE_UPLOAD_DEFAULT_DESCRIPTION": "Uploaded by AIM",
+                "YOUTUBE_UPLOAD_DEFAULT_DESCRIPTION": "Uploaded by Drama Cloud Bot",
             }
         )
         # Update the UI - go back to YouTube main menu
