@@ -11,7 +11,7 @@ from vt import Client as VTClient
 
 from bot import DOWNLOAD_DIR
 from bot.core.config_manager import Config
-from bot.helper.ext_utils.bot_utils import new_task
+from bot.helper.ext_utils.bot_utils import SetInterval, new_task
 from bot.helper.ext_utils.links_utils import is_url
 from bot.helper.ext_utils.status_utils import get_readable_file_size
 from bot.helper.telegram_helper.button_build import ButtonMaker
@@ -239,7 +239,7 @@ def _format_signatures(scan_data: dict, scan_id: str) -> tuple[str, object]:
 
     if not signatures:
         response = (
-            "ℹ️ <b>No malware signatures found</b>\n\nThis file appears to be clean."
+            "i <b>No malware signatures found</b>\n\nThis file appears to be clean."
         )
     else:
         response = f"<b>🦠 Malware Signatures ({len(signatures)})</b>\n\n"
@@ -369,9 +369,6 @@ async def cleanup_old_scan_results():
         LOGGER.info(f"Cleaned up {len(expired_keys)} expired VT scan results")
 
 
-# Schedule periodic cleanup
-from bot.helper.ext_utils.bot_utils import SetInterval
-
 # Clean up old scan results every 30 minutes
 if Config.VT_ENABLED:
     SetInterval(1800, cleanup_old_scan_results)  # 1800 seconds = 30 minutes
@@ -399,7 +396,8 @@ class VirusTotalClient:
         try:
             # Upload the file
             # Note: Using blocking open() because VirusTotal API expects a file object, not bytes
-            with open(file_path, "rb") as f:
+            # This is a limitation of the VirusTotal API, not our code
+            with open(file_path, "rb") as f:  # noqa: ASYNC230
                 analysis = await self.client.scan_file_async(
                     f, wait_for_completion=True
                 )
@@ -496,7 +494,7 @@ async def scan_file(client, message, file_msg):
     else:
         error_msg = await send_message(message, "Unsupported file type.")
         # Auto-delete error message after 5 minutes
-        create_task(auto_delete_message(error_msg, time=300))
+        _ = create_task(auto_delete_message(error_msg, time=300))
         return
 
     # Check file size
@@ -506,7 +504,7 @@ async def scan_file(client, message, file_msg):
             f"File size exceeds the maximum allowed size for VirusTotal scanning ({get_readable_file_size(Config.VT_MAX_FILE_SIZE)}).",
         )
         # Auto-delete error message after 5 minutes
-        create_task(auto_delete_message(error_msg, time=300))
+        _ = create_task(auto_delete_message(error_msg, time=300))
         return
 
     # Send initial message
@@ -523,7 +521,7 @@ async def scan_file(client, message, file_msg):
             status_msg, "❌ Failed to initialize VirusTotal client."
         )
         # Auto-delete error message after 5 minutes
-        create_task(auto_delete_message(error_msg, time=300))
+        _ = create_task(auto_delete_message(error_msg, time=300))
         return
 
     file_path = None
@@ -600,7 +598,7 @@ async def scan_url(message, url):
             status_msg, "❌ Failed to initialize VirusTotal client."
         )
         # Auto-delete error message after 5 minutes
-        create_task(auto_delete_message(error_msg, time=300))
+        _ = create_task(auto_delete_message(error_msg, time=300))
         return
 
     try:
@@ -652,7 +650,7 @@ async def virustotal_scan(client, message):
     Scans a file or URL for viruses using VirusTotal
     """
     # Auto-delete command message after 5 minutes
-    create_task(auto_delete_message(message, time=300))
+    _ = create_task(auto_delete_message(message, time=300))
 
     # Check if VirusTotal is enabled
     if not Config.VT_ENABLED:
@@ -660,7 +658,7 @@ async def virustotal_scan(client, message):
             message, "VirusTotal scanning is disabled. Enable it in bot settings."
         )
         # Auto-delete error message after 5 minutes
-        create_task(auto_delete_message(error_msg, time=300))
+        _ = create_task(auto_delete_message(error_msg, time=300))
         return
 
     # Check if API key is set
@@ -669,7 +667,7 @@ async def virustotal_scan(client, message):
             message, "VirusTotal API key is not set. Please set it in bot settings."
         )
         # Auto-delete error message after 5 minutes
-        create_task(auto_delete_message(error_msg, time=300))
+        _ = create_task(auto_delete_message(error_msg, time=300))
         return
 
     # Check if VirusTotal client can be created
@@ -678,7 +676,7 @@ async def virustotal_scan(client, message):
             message, "Failed to initialize VirusTotal client."
         )
         # Auto-delete error message after 5 minutes
-        create_task(auto_delete_message(error_msg, time=300))
+        _ = create_task(auto_delete_message(error_msg, time=300))
         return
 
     # Check if this is a reply to a message
@@ -686,7 +684,7 @@ async def virustotal_scan(client, message):
 
     # Auto-delete replied message after 5 minutes if it exists
     if replied:
-        create_task(auto_delete_message(replied, time=300))
+        _ = create_task(auto_delete_message(replied, time=300))
 
     # If this is a command with a URL
     args = message.text.split(maxsplit=1)
@@ -722,4 +720,4 @@ async def virustotal_scan(client, message):
         "3. Use /virustotal <url> to scan a URL directly",
     )
     # Auto-delete error message after 5 minutes
-    create_task(auto_delete_message(error_msg, time=300))
+    _ = create_task(auto_delete_message(error_msg, time=300))

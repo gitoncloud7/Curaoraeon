@@ -1,3 +1,4 @@
+import shlex
 from asyncio import Event, create_task, wait_for
 from functools import partial
 from time import time
@@ -13,6 +14,7 @@ from bot.helper.aeon_utils.access_check import error_check
 from bot.helper.ext_utils.bot_utils import (
     COMMAND_USAGE,
     arg_parser,
+    is_flag_enabled,
     new_task,
     sync_to_async,
 )
@@ -32,6 +34,10 @@ from bot.helper.telegram_helper.message_utils import (
     delete_message,
     edit_message,
     send_message,
+)
+from bot.modules.media_tools import (
+    register_pending_task_user,
+    show_media_tools_for_task,
 )
 
 
@@ -85,7 +91,7 @@ async def select_format(_, query, obj):
         await delete_message(obj.listener.message)
 
         # Create background task for auto-deletion
-        create_task(  # noqa: RUF006
+        _ = create_task(
             auto_delete_message(cancel_msg, time=300),
         )  # 5 minutes auto-delete
 
@@ -713,7 +719,7 @@ class YtDlp(TaskListener):
                 self.message,
                 "❌ This command requires text input. Please send a text message with the command and URL.",
             )
-            create_task(auto_delete_message(error_msg, time=300))  # noqa: RUF006
+            _ = create_task(auto_delete_message(error_msg, time=300))
             return
 
         text = self.message.text.split("\n")
@@ -723,7 +729,7 @@ class YtDlp(TaskListener):
         if error_msg:
             await delete_links(self.message)
             error = await send_message(self.message, error_msg, error_button)
-            create_task(auto_delete_message(error, time=300))  # noqa: RUF006
+            _ = create_task(auto_delete_message(error, time=300))
             return
 
         args = {
@@ -839,8 +845,6 @@ class YtDlp(TaskListener):
         arg_parser(input_list[1:], args)
 
         # Check if media tools flags are enabled
-        from bot.helper.ext_utils.bot_utils import is_flag_enabled
-
         # Disable flags that depend on disabled media tools
         for flag in list(args.keys()):
             if flag.startswith("-") and not is_flag_enabled(flag):
@@ -900,8 +904,6 @@ class YtDlp(TaskListener):
                                 )
                             else:
                                 # If not found as preset, treat as direct command
-                                import shlex
-
                                 self.ffmpeg_cmds.append(shlex.split(preset_name))
                                 LOGGER.info(
                                     f"Added direct FFmpeg command: {preset_name}"
@@ -930,8 +932,6 @@ class YtDlp(TaskListener):
                         )
                     else:
                         # Direct command
-                        import shlex
-
                         self.ffmpeg_cmds = [shlex.split(args["-ff"])]
                         LOGGER.info(
                             f"Using direct FFmpeg command: {self.ffmpeg_cmds}"
@@ -956,8 +956,6 @@ class YtDlp(TaskListener):
                         # Check if it's a list of strings or a list of lists
                         if all(isinstance(item, str) for item in evaluated_cmds):
                             # List of command strings
-                            import shlex
-
                             self.ffmpeg_cmds = [
                                 shlex.split(cmd) for cmd in evaluated_cmds
                             ]
@@ -969,20 +967,14 @@ class YtDlp(TaskListener):
                             self.ffmpeg_cmds = []
                             for item in evaluated_cmds:
                                 if isinstance(item, str):
-                                    import shlex
-
                                     self.ffmpeg_cmds.append(shlex.split(item))
                                 elif isinstance(item, list):
                                     self.ffmpeg_cmds.append(item)
                                 else:
                                     # Try to convert to string and split
-                                    import shlex
-
                                     self.ffmpeg_cmds.append(shlex.split(str(item)))
                     else:
                         # Single command
-                        import shlex
-
                         self.ffmpeg_cmds = [shlex.split(str(evaluated_cmds))]
 
                     LOGGER.info(
@@ -1006,8 +998,6 @@ class YtDlp(TaskListener):
         self.link = args["link"]
         self.compress = args["-z"]
         # Enable compression if -z flag is set and archive flags are enabled
-        from bot.helper.ext_utils.bot_utils import is_flag_enabled
-
         if self.compress and is_flag_enabled("-z"):
             self.compression_enabled = True
         self.thumb = args["-t"]
@@ -1114,8 +1104,6 @@ class YtDlp(TaskListener):
 
         # Register user for media tools if -mt flag is used
         if self.media_tools:
-            from bot.modules.media_tools import register_pending_task_user
-
             register_pending_task_user(self.user_id)
 
         is_bulk = args["-b"]
@@ -1192,7 +1180,7 @@ class YtDlp(TaskListener):
                 COMMAND_USAGE["yt"][0],
                 COMMAND_USAGE["yt"][1],
             )
-            create_task(auto_delete_message(usage_msg, time=300))  # noqa: RUF006
+            _ = create_task(auto_delete_message(usage_msg, time=300))
             await self.remove_from_same_dir()
             return
 
@@ -1204,14 +1192,12 @@ class YtDlp(TaskListener):
         except Exception as e:
             await delete_links(self.message)
             error_msg = await send_message(self.message, str(e))
-            create_task(auto_delete_message(error_msg, time=300))  # noqa: RUF006
+            _ = create_task(auto_delete_message(error_msg, time=300))
             await self.remove_from_same_dir()
             return
 
         # Show media tools interface if -mt flag is used
         if self.media_tools:
-            from bot.modules.media_tools import show_media_tools_for_task
-
             result = await show_media_tools_for_task(self.client, self.message, self)
             if not result:
                 # User cancelled or timeout occurred
@@ -1239,7 +1225,7 @@ class YtDlp(TaskListener):
             msg = str(e).replace("<", " ").replace(">", " ")
             await delete_links(self.message)
             error_msg = await send_message(self.message, f"{self.tag} {msg}")
-            create_task(auto_delete_message(error_msg, time=300))  # noqa: RUF006
+            _ = create_task(auto_delete_message(error_msg, time=300))
             await self.remove_from_same_dir()
             return
 
@@ -1252,7 +1238,7 @@ class YtDlp(TaskListener):
             error_msg = await send_message(
                 self.message, f"{self.tag} Failed to extract video information"
             )
-            create_task(auto_delete_message(error_msg, time=300))  # noqa: RUF006
+            _ = create_task(auto_delete_message(error_msg, time=300))
             await self.remove_from_same_dir()
             return
 
@@ -1265,7 +1251,7 @@ class YtDlp(TaskListener):
         LOGGER.info(f"Downloading with YT-DLP: {self.link}")
         playlist = result and "entries" in result
         ydl = YoutubeDLHelper(self)
-        create_task(ydl.add_download(path, qual, playlist, opt))  # noqa: RUF006
+        _ = create_task(ydl.add_download(path, qual, playlist, opt))
         await delete_links(self.message)
         return
 
