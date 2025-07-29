@@ -23,7 +23,7 @@ def configure_mega_import():
 
 def _configure_mega_library_path():
     """Configure library path for MEGA SDK imports"""
-    # Primary installation paths (based on Aeon script)
+    # Primary installation paths (based on Drama Cloud Bot script)
     mega_paths = [
         "/usr/local/lib/python3.13/dist-packages/mega",
         "/usr/lib/python3/dist-packages/mega",

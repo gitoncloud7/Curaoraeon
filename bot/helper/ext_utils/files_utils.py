@@ -366,7 +366,7 @@ async def split_file(f_path, split_size, listener):
         LOGGER.error(f"Split input file does not exist: {f_path}")
         return False
 
-    # Get file size for logging (Old Aeon-MLTB logic - simple and clean)
+    # Get file size for logging (Old Drama Cloud Bot logic - simple and clean)
     try:
         file_size = await aiopath.getsize(f_path)
         file_size_gb = file_size / (1024 * 1024 * 1024)
@@ -381,7 +381,7 @@ async def split_file(f_path, split_size, listener):
         LOGGER.error(f"Error calculating file size: {e}")
         # Continue with the split operation anyway
 
-    # Create the command (Old Aeon-MLTB logic - trust the split_size passed from proceed_split)
+    # Create the command (Old Drama Cloud Bot logic - trust the split_size passed from proceed_split)
     # The split_size has already been validated in proceed_split and get_user_split_size
     split_size_bytes = int(split_size)
 
@@ -483,7 +483,7 @@ async def split_file(f_path, split_size, listener):
                 )
             return False
 
-        # Simple validation - just log the split files created (Old Aeon-MLTB approach)
+        # Simple validation - just log the split files created (Old Drama Cloud Bot approach)
         LOGGER.info(f"Successfully split {f_path} into {len(split_files)} parts")
 
         # Log the first few split file names for debugging

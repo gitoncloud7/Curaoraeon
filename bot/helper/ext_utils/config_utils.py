@@ -1172,7 +1172,7 @@ async def reset_youtube_configs(database):
         "YOUTUBE_UPLOAD_DEFAULT_PRIVACY": "unlisted",
         "YOUTUBE_UPLOAD_DEFAULT_CATEGORY": "22",
         "YOUTUBE_UPLOAD_DEFAULT_TAGS": "",
-        "YOUTUBE_UPLOAD_DEFAULT_DESCRIPTION": "Uploaded by AIM",
+        "YOUTUBE_UPLOAD_DEFAULT_DESCRIPTION": "Uploaded by Drama Cloud Bot",
     }
 
     # Update global configurations

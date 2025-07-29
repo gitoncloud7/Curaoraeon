@@ -1,10 +1,6 @@
-![](https://github.com/5hojib/5hojib/raw/main/images/Aeon-MLTB.gif)
+# Drama Cloud Bot
 
----
-
-# Aeon-MLTB Bot
-
-Aeon-MLTB is a streamlined and feature-rich bot designed for efficient deployment and enhanced functionality.
+Drama Cloud Bot is a streamlined and feature-rich bot designed for efficient deployment and enhanced functionality.
 
 ---
 
@@ -18,11 +14,11 @@ Aeon-MLTB is a streamlined and feature-rich bot designed for efficient deploymen
 
 ## Read these
 
-[Deployment](https://github.com/AeonOrg/Aeon-MLTB/blob/extended/docs/DEPLOYMENT.md)
-[Configuration](https://github.com/AeonOrg/Aeon-MLTB/blob/extended/docs/CONFIGURATIONS.md)
-[Commands](https://github.com/AeonOrg/Aeon-MLTB/blob/extended/docs/COMMANDS.md)
-[Features](https://github.com/AeonOrg/Aeon-MLTB/blob/extended/docs/FEATURES.md)
-[Extras](https://github.com/AeonOrg/Aeon-MLTB/blob/extended/docs/EXTRAS.md)
+[Deployment](docs/DEPLOYMENT.md)
+[Configuration](docs/CONFIGURATIONS.md)
+[Commands](docs/COMMANDS.md)
+[Features](docs/FEATURES.md)
+[Extras](docs/EXTRAS.md)
 
 ---
 
@@ -36,7 +32,7 @@ We welcome contributions! Whether it's bug fixes, feature enhancements, or gener
 
 ## Support
 
-For issues, join here https://t.me/AeonDiscussion.
+For issues, join here https://t.me/DramaCloud.
 
 ---
 
@@ -49,4 +45,4 @@ This project is licensed under the MIT License. Refer to the [LICENSE](LICENSE) 
 ## Acknowledgements
 
 - Special thanks to the original developers of the [Mirror-Leech-Telegram-Bot](https://github.com/anasty17/mirror-leech-telegram-bot).
-- Gratitude to contributors from various repositories whose features have been integrated into Aeon.
+- Gratitude to contributors from various repositories whose features have been integrated into Drama Cloud Bot.

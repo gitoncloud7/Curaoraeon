@@ -23,11 +23,11 @@ AUTO_REDEPLOY = False  # Enable/disable automatic redeployment on schedule
 REDEPLOY_INTERVAL_DAYS = 7  # Auto redeploy interval in days (1, 3, 7, 14, or 30)
 
 # Update
-UPSTREAM_REPO = "https://github.com/AeonOrg/Aeon-MLTB"  # Repository URL for updates
-UPSTREAM_BRANCH = "extended"  # Branch to use for updates
+UPSTREAM_REPO = "https://github.com/DramaCloud/DramaCloud-Bot"  # Repository URL for updates
+UPSTREAM_BRANCH = "main"  # Branch to use for updates
 
 # Branding Settings
-CREDIT = "Powered by @aimmirror"  # Credit text shown in status messages and RSS feeds (default: "Powered by @aimmirror")
+CREDIT = "Powered by @Drama_Cloud"  # Credit text shown in status messages and RSS feeds (default: "Powered by @Drama_Cloud")
 OWNER_THUMB = "https://graph.org/file/80b7fb095063a18f9e232.jpg"  # Default thumbnail URL for owner (accepts Telegram file links)
 
 # OPTIONAL CONFIG
@@ -814,7 +814,7 @@ YOUTUBE_UPLOAD_DEFAULT_TAGS = (
     ""  # Default tags for uploaded videos, separated by comma
 )
 YOUTUBE_UPLOAD_DEFAULT_DESCRIPTION = (
-    "Uploaded by Aeon"  # Default description for uploaded videos
+    "Uploaded by Drama Cloud Bot"  # Default description for uploaded videos
 )
 YOUTUBE_UPLOAD_DEFAULT_TITLE = ""  # Default title template (empty = use filename)
 # Title template supports variables: {filename}, {date}, {time}, {size}

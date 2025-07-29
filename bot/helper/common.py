@@ -4369,7 +4369,7 @@ class TaskConfig:
                         )
                         self.split_size = None
 
-            # Old Aeon-MLTB logic: Only store custom split size if explicitly set by user
+            # Old Drama Cloud Bot logic: Only store custom split size if explicitly set by user
             # The actual splitting decision will be made in proceed_split based on max_split_size
             if not self.split_size:
                 # User settings have priority for custom split sizes

@@ -797,8 +797,8 @@ async def qbittorrent_proxy(path: str = "", request: Request = None):
 async def homepage():
     return (
         "<h1>See multi-purpose telegram bot at "
-        "<a href='https://github.com/AeonOrg/Aeon-MLTB/tree/extended'>@GitHub</a> "
-        "By <a href='https://github.com/AeonOrg'>AeonOrg</a></h1>"
+        "<a href='https://github.com/DramaCloud/DramaCloud-Bot'>@GitHub</a> "
+"By <a href='https://github.com/DramaCloud'>DramaCloud</a></h1>"
     )
 
 

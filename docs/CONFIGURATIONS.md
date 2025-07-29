@@ -508,7 +508,7 @@
 | `YOUTUBE_UPLOAD_DEFAULT_PRIVACY` | `str` | Default privacy setting: `public`, `unlisted`, `private`. Default: `unlisted`. |
 | `YOUTUBE_UPLOAD_DEFAULT_CATEGORY` | `str` | Default category ID (22 = People & Blogs). Default: `22`. |
 | `YOUTUBE_UPLOAD_DEFAULT_TAGS` | `str` | Default tags for uploaded videos, separated by comma. |
-| `YOUTUBE_UPLOAD_DEFAULT_DESCRIPTION` | `str` | Default description for uploaded videos. Default: `Uploaded by AIM`. |
+| `YOUTUBE_UPLOAD_DEFAULT_DESCRIPTION` | `str` | Default description for uploaded videos. Default: `Uploaded by Drama Cloud Bot`. |
 | `YOUTUBE_UPLOAD_DEFAULT_TITLE` | `str` | Default title template (empty = use filename). |
 
 ### Advanced YouTube API Settings
@@ -1142,7 +1142,7 @@
 | `CORRECT_CMD_SUFFIX`   | `str`  | Comma-separated list of allowed command suffixes. |
 | `WRONG_CMD_WARNINGS_ENABLED` | `bool` | Enable/disable warnings for wrong command suffixes. Default: `False`. |
 
-## 21. Extra fields from Aeon
+## 21. Extra fields from Drama Cloud Bot
 
 | Variable               | Type   | Description |
 |------------------------|--------|-------------|
@@ -1161,7 +1161,7 @@
 | `LOGIN_PASS`           | `str`  | Password for web login authentication. |
 | `AD_KEYWORDS`          | `str`  | Custom keywords/phrases for ad detection, separated by comma. |
 | `AD_BROADCASTER_ENABLED` | `bool` | Enable/disable automatic ad broadcasting from FSUB channels to users. Default: `False`. |
-| `CREDIT`               | `str`  | Credit text shown in status messages and RSS feeds. Default: `Powered by @aimmirror`. |
+| `CREDIT`               | `str`  | Credit text shown in status messages and RSS feeds. Default: `Powered by @Drama_Cloud`. |
 | `OWNER_THUMB`          | `str`  | Default thumbnail URL for owner. Default: `https://graph.org/file/80b7fb095063a18f9e232.jpg`. |
 | `PIL_MEMORY_LIMIT`     | `int`  | PIL memory limit in MB. Default: `2048`. |
 | `MEDIA_SEARCH_CHATS`   | `list` | List of chat IDs for media search functionality. |

@@ -125,7 +125,7 @@ jobs:
                   'HEROKU_API_KEY': getattr(config, 'HEROKU_API_KEY', ''),
                   'HEROKU_EMAIL': getattr(config, 'HEROKU_EMAIL', ''),
                   'HEROKU_TEAM_NAME': getattr(config, 'HEROKU_TEAM_NAME', ''),
-                  'UPSTREAM_REPO': getattr(config, 'UPSTREAM_REPO', 'https://github.com/AeonOrg/Aeon-MLTB'),
+                  'UPSTREAM_REPO': getattr(config, 'UPSTREAM_REPO', 'https://github.com/DramaCloud/DramaCloud-Bot'),
                   'UPSTREAM_BRANCH': getattr(config, 'UPSTREAM_BRANCH', 'extended'),
                   'AUTO_REDEPLOY': str(getattr(config, 'AUTO_REDEPLOY', False)).lower(),
                   'REDEPLOY_INTERVAL_DAYS': str(getattr(config, 'REDEPLOY_INTERVAL_DAYS', 7)),
@@ -268,5 +268,5 @@ jobs:
           HD_BOT_TOKEN: ${{ github.event_name == 'workflow_dispatch' && (env.CONFIG_BOT_TOKEN || inputs.BOT_TOKEN || secrets.BOT_TOKEN) || (env.CONFIG_BOT_TOKEN || secrets.BOT_TOKEN) }}
           HD_HEROKU_APP_NAME: ${{ github.event_name == 'workflow_dispatch' && (env.CONFIG_HEROKU_APP_NAME || inputs.HEROKU_APP_NAME || secrets.HEROKU_APP_NAME) || (env.CONFIG_HEROKU_APP_NAME || secrets.HEROKU_APP_NAME) }}
           HD_HEROKU_API_KEY: ${{ github.event_name == 'workflow_dispatch' && (env.CONFIG_HEROKU_API_KEY || inputs.HEROKU_API_KEY || secrets.HEROKU_API_KEY) || (env.CONFIG_HEROKU_API_KEY || secrets.HEROKU_API_KEY) }}
-          HD_UPSTREAM_REPO: ${{ env.CONFIG_UPSTREAM_REPO || secrets.UPSTREAM_REPO || 'https://github.com/AeonOrg/Aeon-MLTB' }}
+          HD_UPSTREAM_REPO: ${{ env.CONFIG_UPSTREAM_REPO || secrets.UPSTREAM_REPO || 'https://github.com/DramaCloud/DramaCloud-Bot' }}
           HD_UPSTREAM_BRANCH: ${{ env.CONFIG_UPSTREAM_BRANCH || secrets.UPSTREAM_BRANCH || 'extended' }}

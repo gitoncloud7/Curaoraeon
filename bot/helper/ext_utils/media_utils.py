@@ -709,7 +709,7 @@ async def get_media_type(file_path):
 
 
 async def take_ss(video_file, ss_nb) -> bool:
-    """Take screenshots from video using simple approach like old Aeon"""
+    """Take screenshots from video using simple approach like old Drama Cloud Bot"""
     duration = (await get_media_info(video_file))[0]
     if duration != 0:
         dirpath, name = video_file.rsplit("/", 1)
@@ -4003,7 +4003,7 @@ async def remove_tracks(
 
 
 async def get_video_thumbnail(video_file, duration):
-    """Extract a thumbnail from a video file using simple approach like old Aeon"""
+    """Extract a thumbnail from a video file using simple approach like old Drama Cloud Bot"""
     output_dir = f"{DOWNLOAD_DIR}thumbnails"
     await makedirs(output_dir, exist_ok=True)
     output = ospath.join(output_dir, f"{time()}.jpg")

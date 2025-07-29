@@ -274,7 +274,7 @@ DEFAULT_VALUES = {
     "YOUTUBE_UPLOAD_DEFAULT_PRIVACY": "unlisted",
     "YOUTUBE_UPLOAD_DEFAULT_CATEGORY": "22",
     "YOUTUBE_UPLOAD_DEFAULT_TAGS": "",
-    "YOUTUBE_UPLOAD_DEFAULT_DESCRIPTION": "Uploaded by AIM",
+    "YOUTUBE_UPLOAD_DEFAULT_DESCRIPTION": "Uploaded by Drama Cloud Bot",
     # Watermark Settings
     "WATERMARK_ENABLED": False,
     "WATERMARK_KEY": "",
@@ -292,7 +292,7 @@ DEFAULT_VALUES = {
     # Audio Watermark Settings
     "AUDIO_WATERMARK_VOLUME": 0.0,
     # Branding Settings
-    "CREDIT": "Powered by @aimmirror",
+    "CREDIT": "Powered by @Drama_Cloud",
     "OWNER_THUMB": "https://graph.org/file/80b7fb095063a18f9e232.jpg",
     "AUDIO_WATERMARK_INTERVAL": 0,
     # Subtitle Watermark Settings
@@ -3738,7 +3738,7 @@ These are advanced settings that should only be modified if you understand their
         category = Config.YOUTUBE_UPLOAD_DEFAULT_CATEGORY or "22 (Default)"
         tags = Config.YOUTUBE_UPLOAD_DEFAULT_TAGS or "None (Default)"
         description = (
-            Config.YOUTUBE_UPLOAD_DEFAULT_DESCRIPTION or "Uploaded by AIM (Default)"
+            Config.YOUTUBE_UPLOAD_DEFAULT_DESCRIPTION or "Uploaded by Drama Cloud Bot (Default)"
         )
 
         msg = f"""<b>📺 YouTube General Settings</b> | State: {state}
@@ -13115,7 +13115,7 @@ async def edit_bot_settings(client, query):
         Config.YOUTUBE_UPLOAD_DEFAULT_PRIVACY = "unlisted"
         Config.YOUTUBE_UPLOAD_DEFAULT_CATEGORY = "22"
         Config.YOUTUBE_UPLOAD_DEFAULT_TAGS = ""
-        Config.YOUTUBE_UPLOAD_DEFAULT_DESCRIPTION = "Uploaded by AIM"
+        Config.YOUTUBE_UPLOAD_DEFAULT_DESCRIPTION = "Uploaded by Drama Cloud Bot"
 
         # Update the database
         await database.update_config(
@@ -13123,7 +13123,7 @@ async def edit_bot_settings(client, query):
                 "YOUTUBE_UPLOAD_DEFAULT_PRIVACY": "unlisted",
                 "YOUTUBE_UPLOAD_DEFAULT_CATEGORY": "22",
                 "YOUTUBE_UPLOAD_DEFAULT_TAGS": "",
-                "YOUTUBE_UPLOAD_DEFAULT_DESCRIPTION": "Uploaded by AIM",
+                "YOUTUBE_UPLOAD_DEFAULT_DESCRIPTION": "Uploaded by Drama Cloud Bot",
             }
         )
         # Update the UI - go back to YouTube main menu

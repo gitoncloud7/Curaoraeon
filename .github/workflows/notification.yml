@@ -17,7 +17,7 @@ jobs:
           AUTHOR_URL: https://github.com/${{ github.actor }}
           COMMITS_JSON: ${{ toJson(github.event.commits) }}
         run: |
-          if [[ "$REPO" != "AeonOrg/Aeon-MLTB" ]]; then
+          if [[ "$REPO" != "DramaCloud/DramaCloud-Bot" ]]; then
             echo "Repository is not the original. Skipping Telegram notification."
             exit 0
           fi
