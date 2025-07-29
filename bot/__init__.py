@@ -8,6 +8,7 @@ import os
 import subprocess
 import time
 from asyncio import Lock, new_event_loop, set_event_loop
+from contextlib import suppress
 from datetime import datetime
 from logging import (
     ERROR,
@@ -321,7 +322,7 @@ except (FileNotFoundError, PermissionError) as e:
 except Exception as e:
     LOGGER.error(f"Unexpected error during qBittorrent startup: {e}")
 
-try:
+with suppress(FileNotFoundError, PermissionError):
     subprocess.run(
         [
             "xnzb",
@@ -339,8 +340,6 @@ try:
         ],
         check=False,
     )
-except (FileNotFoundError, PermissionError):
-    pass  # Ignore if xnzb is not available or permission denied
 
 
 scheduler = AsyncIOScheduler(event_loop=bot_loop)

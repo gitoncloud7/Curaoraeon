@@ -3597,7 +3597,7 @@ async def get_users_settings(_, message):
                 msg += kmsg + vmsg
         if not msg:
             error_msg = await send_message(message, "No users data!")
-            create_task(
+            _ = create_task(
                 auto_delete_message(error_msg, time=300)
             )  # Auto-delete after 5 minutes
             return
@@ -3606,16 +3606,16 @@ async def get_users_settings(_, message):
             with BytesIO(msg_ecd) as ofile:
                 ofile.name = "users_settings.txt"
                 file_msg = await send_file(message, ofile)
-                create_task(
+                _ = create_task(
                     auto_delete_message(file_msg, time=300)
                 )  # Auto-delete after 5 minutes
         else:
             success_msg = await send_message(message, msg)
-            create_task(
+            _ = create_task(
                 auto_delete_message(success_msg, time=300)
             )  # Auto-delete after 5 minutes
     else:
         error_msg = await send_message(message, "No users data!")
-        create_task(
+        _ = create_task(
             auto_delete_message(error_msg, time=300)
         )  # Auto-delete after 5 minutes

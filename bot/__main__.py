@@ -1,6 +1,8 @@
 # ruff: noqa: E402
 import asyncio
+import atexit
 import gc
+import os
 from asyncio import create_task, gather
 
 from pyrogram.types import BotCommand
@@ -17,7 +19,40 @@ from .core.startup import load_settings
 bot_loop.run_until_complete(load_settings())
 
 from .core.aeon_client import TgClient
+from .core.handlers import add_handlers
+from .core.jdownloader_booter import jdownloader
+from .core.startup import (
+    load_configurations,
+    load_settings,
+    load_zotify_credentials_from_db,
+    save_settings,
+    start_bot,
+    start_web_server_early,
+    update_aria2_options,
+    update_nzb_options,
+    update_qb_options,
+    update_variables,
+)
+from .core.torrent_manager import TorrentManager
+from .helper.ext_utils.auto_restart import init_auto_restart
+from .helper.ext_utils.bot_utils import create_help_buttons
+from .helper.ext_utils.files_utils import clean_all
+from .helper.ext_utils.gc_utils import log_memory_usage, smart_garbage_collection
+from .helper.ext_utils.task_manager import start_queue_processor
+from .helper.ext_utils.task_monitor import start_monitoring
+from .helper.ext_utils.telegraph_helper import telegraph
+from .helper.listeners.aria2_listener import add_aria2_callbacks
+from .helper.mirror_leech_utils.rclone_utils.serve import rclone_serve_booter
+from .helper.mirror_leech_utils.streamrip_utils.search_handler import (
+    cleanup_all_streamrip_sessions,
+)
 from .helper.telegram_helper.bot_commands import BotCommands
+from .modules import (
+    get_packages_version,
+    initiate_search_tools,
+    restart_notification,
+)
+from .modules.whisper import start_whisper_cleanup
 
 COMMANDS = {
     "MirrorCommand": "- Start mirroring",
@@ -149,22 +184,9 @@ async def main():
     )  # Balanced thresholds to reduce GC frequency while preventing memory bloat
 
     # Start web server immediately for Heroku PORT binding
-    from os import environ
 
-    from .core.startup import (
-        load_configurations,
-        save_settings,
-        start_bot,
-        update_aria2_options,
-        update_nzb_options,
-        update_qb_options,
-        update_variables,
-    )
-
-    if environ.get("PORT"):
+    if os.environ.get("PORT"):
         LOGGER.info("Heroku deployment detected - starting web server immediately")
-        from .core.startup import start_web_server_early
-
         await start_web_server_early()
 
     await gather(
@@ -172,15 +194,12 @@ async def main():
     )
 
     # Load Zotify credentials from database after bot clients are started
-    from .core.startup import load_zotify_credentials_from_db
-
     try:
         await load_zotify_credentials_from_db()
     except Exception as e:
         LOGGER.error(f"Failed to restore Zotify credentials: {e}")
 
     await gather(load_configurations(), update_variables())
-    from .core.torrent_manager import TorrentManager
 
     await TorrentManager.initiate()
     await gather(
@@ -191,24 +210,11 @@ async def main():
 
     # Start the scheduled deletion checker and other tasks
     await start_bot()
-    from .core.jdownloader_booter import jdownloader
-    from .helper.ext_utils.files_utils import clean_all
-    from .helper.ext_utils.gc_utils import log_memory_usage, smart_garbage_collection
-    from .helper.ext_utils.telegraph_helper import telegraph
-    from .helper.mirror_leech_utils.rclone_utils.serve import rclone_serve_booter
-    from .modules import (
-        get_packages_version,
-        initiate_search_tools,
-        restart_notification,
-    )
 
     await gather(
         set_commands(),
         jdownloader.boot(),
     )
-    from .helper.ext_utils.task_manager import start_queue_processor
-    from .helper.ext_utils.task_monitor import start_monitoring
-
     # Optimized startup sequence - prioritize essential tasks
     await gather(
         save_settings(),
@@ -218,9 +224,9 @@ async def main():
     )
 
     # Initialize non-critical services with delay to reduce startup load
-    create_task(initiate_search_tools())  # noqa: RUF006
-    create_task(get_packages_version())  # noqa: RUF006
-    create_task(rclone_serve_booter())  # noqa: RUF006
+    _ = create_task(initiate_search_tools())
+    _ = create_task(get_packages_version())
+    _ = create_task(rclone_serve_booter())
 
     # Start background services immediately without delays
     LOGGER.info("Starting background services...")
@@ -229,19 +235,17 @@ async def main():
     # Optimized to reduce resource usage by default
     if Config.TASK_MONITOR_ENABLED:
         LOGGER.info("Starting optimized task monitoring system...")
-        create_task(start_monitoring())  # noqa: RUF006
+        _ = create_task(start_monitoring())
 
         # Start queue processor with reduced frequency to save resources
         LOGGER.info("Starting optimized queue processor...")
-        create_task(start_queue_processor())  # noqa: RUF006
+        _ = create_task(start_queue_processor())
     else:
         LOGGER.info(
             "Task monitoring is disabled - skipping task monitor and queue processor (recommended for resource optimization)"
         )
 
     # Initialize auto-restart scheduler
-    from .helper.ext_utils.auto_restart import init_auto_restart
-
     init_auto_restart()
 
     # User data is already loaded from database in load_settings()
@@ -249,9 +253,7 @@ async def main():
 
     # Initialize whisper cleanup task
     LOGGER.info("Initializing whisper cleanup task...")
-    from .modules.whisper import start_whisper_cleanup
-
-    create_task(start_whisper_cleanup())  # noqa: RUF006
+    _ = create_task(start_whisper_cleanup())
 
     # Automatic indexing removed - media indexing functionality disabled
 
@@ -273,18 +275,12 @@ async def main():
 
 bot_loop.run_until_complete(main())
 
-from .core.handlers import add_handlers
-from .helper.ext_utils.bot_utils import create_help_buttons
-from .helper.listeners.aria2_listener import add_aria2_callbacks
-
 add_aria2_callbacks()
 create_help_buttons()
 add_handlers()
 
 
 # Setup cleanup handler
-import atexit
-
 from .helper.ext_utils.db_handler import database
 
 
@@ -294,10 +290,6 @@ async def cleanup():
 
     # Cleanup streamrip sessions to prevent unclosed session warnings
     try:
-        from .helper.mirror_leech_utils.streamrip_utils.search_handler import (
-            cleanup_all_streamrip_sessions,
-        )
-
         await cleanup_all_streamrip_sessions()
     except Exception as e:
         LOGGER.error(f"Error during streamrip cleanup: {e}")
@@ -328,7 +320,7 @@ atexit.register(run_cleanup)
 
 
 # Set up exception handler for unhandled task exceptions
-def handle_loop_exception(loop, context):
+def handle_loop_exception(_loop, context):
     """Handle unhandled exceptions in the event loop"""
     exception = context.get("exception")
     if exception:
