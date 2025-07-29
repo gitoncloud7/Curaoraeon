@@ -50,8 +50,8 @@ jobs:
 
       - name: Prepare Docker Build Files
         run: |
-          cp dev/Aeon .
-          chmod +x Aeon
+          cp dev/DramaCloud .
+          chmod +x DramaCloud
 
       - name: Build and Push
         uses: docker/build-push-action@v5

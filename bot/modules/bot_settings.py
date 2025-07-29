@@ -292,7 +292,7 @@ DEFAULT_VALUES = {
     # Audio Watermark Settings
     "AUDIO_WATERMARK_VOLUME": 0.0,
     # Branding Settings
-    "CREDIT": "Powered by @aimmirror",
+    "CREDIT": "Powered by @Drama_Cloud",
     "OWNER_THUMB": "https://graph.org/file/80b7fb095063a18f9e232.jpg",
     "AUDIO_WATERMARK_INTERVAL": 0,
     # Subtitle Watermark Settings

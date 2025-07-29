@@ -1,13 +1,13 @@
 ## Deployment Instructions through Google Colab (Heroku)
 
-Follow these steps to deploy Aeon-MLTB to Heroku using Google Colab:
+Follow these steps to deploy Drama Cloud Bot to Heroku using Google Colab:
 
 ### 1. Open the Colab Notebook
 - Click on this link to open the deployment notebook: [Deploy to Heroku via Colab](https://colab.research.google.com/github/AeonOrg/Aeon-MLTB/blob/deploy_extended/Deploy_to_Heroku.ipynb)
 - Make sure you're signed in to your Google account.
 
 ### 2. Fork and Star the Repository
-- Before proceeding with the deployment, fork the [Aeon-MLTB repository](https://github.com/AeonOrg/Aeon-MLTB).
+- Before proceeding with the deployment, fork the [Drama Cloud Bot repository](https://github.com/DramaCloud/DramaCloud-Bot).
 - Give the repository a star to show your support.
 
 ### 3. Prepare Required Information
@@ -36,7 +36,7 @@ Gather the following information before running the notebook:
 
 ## Deployment Instructions through Github Workflow (Heroku)
 
-Follow these steps to deploy Aeon-MLTB to Heroku:
+Follow these steps to deploy Drama Cloud Bot to Heroku:
 
 ### 1. Fork and Star the Repository
 - Click the **Fork** button at the top-right corner of this repository.
@@ -72,7 +72,7 @@ Follow these steps to deploy Aeon-MLTB to Heroku:
 
 ## Deployment Instructions (VPS)
 
-Follow these steps to deploy Aeon to VPS:
+Follow these steps to deploy Drama Cloud Bot to VPS:
 
 ### 1. Star the Repository
 - Give the repository a star to show your support.
@@ -81,7 +81,7 @@ Follow these steps to deploy Aeon to VPS:
 - Clone the repository to your VPS.
 
 ```
-git clone https://github.com/AeonOrg/Aeon-MLTB.git && cd Aeon-MLTB && git checkout extended
+git clone https://github.com/DramaCloud/DramaCloud-Bot.git && cd DramaCloud-Bot && git checkout main
 ```
 
 ### 3. Install Requirements
@@ -160,13 +160,13 @@ sudo docker compose logs --follow
 - Build Docker image:
 
 ```
-sudo docker build . -t aeon-mltb
+sudo docker build . -t drama-cloud-bot
 ```
 
 - Run the image:
 
 ```
-sudo docker run --network host aeon-mltb
+sudo docker run --network host drama-cloud-bot
 ```
 
 - To stop the running image:
@@ -204,7 +204,7 @@ sudo ./open_ports.sh
 ## Heroku CLI Deploy Guide (Windows, Linux, Android)
 
 ### Overview
-This guide provides step-by-step instructions for deploying Aeon-MLTB to Heroku using the command line interface (CLI) across different platforms. This method deploys the **extended** branch directly to Heroku.
+This guide provides step-by-step instructions for deploying Drama Cloud Bot to Heroku using the command line interface (CLI) across different platforms. This method deploys the **main** branch directly to Heroku.
 
 ### Prerequisites
 - Git installed on your system
@@ -238,13 +238,13 @@ pkg update -y && pkg install git -y
 #### 1. Fork and Clone Repository
 
 1. **Fork the Repository**
-   - Go to [https://github.com/AeonOrg/Aeon-MLTB](https://github.com/AeonOrg/Aeon-MLTB)
+   - Go to [https://github.com/DramaCloud/DramaCloud-Bot](https://github.com/DramaCloud/DramaCloud-Bot)
    - Click the **Fork** button to create your own copy
    - Star the repository to show support
 
-2. **Clone Your Fork and Switch to deploy_extended Branch**
+2. **Clone Your Fork and Switch to main Branch**
 ```bash
-git clone https://github.com/YOUR-GITHUB-USERNAME/Aeon-MLTB.git && cd Aeon-MLTB && git checkout deploy_extended
+git clone https://github.com/YOUR-GITHUB-USERNAME/DramaCloud-Bot.git && cd DramaCloud-Bot && git checkout main
 ```
 Replace `YOUR-GITHUB-USERNAME` with your actual GitHub username.
 
@@ -342,8 +342,8 @@ This command pushes your local `deploy` branch (which contains the extended bran
 
 ### Video Guides
 
-- **Android Guide**: [Telegram Link](https://t.me/AeonDiscussion/80629)
-- **Linux Guide**: [Telegram Link](https://t.me/AeonDiscussion/80729)
+- **Android Guide**: [Telegram Link](https://t.me/DramaCloud/80629)
+- **Linux Guide**: [Telegram Link](https://t.me/DramaCloud/80729)
 
 ### Updating Your Deployment
 
@@ -365,7 +365,7 @@ If any major update comes then redeploy is recommended following the same method
 
 ---
 
-## Aeon-MLTB Docker Image Build Guide
+## Drama Cloud Bot Docker Image Build Guide
 
 ### Usage
 

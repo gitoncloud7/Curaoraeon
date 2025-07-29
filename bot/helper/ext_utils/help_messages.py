@@ -2450,7 +2450,7 @@ tool_other_features = """<b>📦 Other Tools & Features</b>
 <b>💡 Examples:</b>
 <code>/tool https://github.com/torvalds/linux</code>
 <code>/tool https://github.com/microsoft/vscode</code>
-<code>/tool git@github.com:AeonOrg/Aeon-MLTB.git</code>
+<code>/tool git@github.com/DramaCloud/DramaCloud-Bot.git</code>
 
 <b>📋 Download Details:</b>
 • Downloads the latest main/master branch

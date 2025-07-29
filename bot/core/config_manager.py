@@ -1342,7 +1342,7 @@ class Config:
 
     # Branding Settings
     CREDIT: str = (
-        "Powered by @aimmirror"  # Credit text shown in status messages and RSS feeds
+        "Powered by @Drama_Cloud"  # Credit text shown in status messages and RSS feeds
     )
     OWNER_THUMB: str = "https://graph.org/file/80b7fb095063a18f9e232.jpg"  # Default thumbnail URL for owner
 

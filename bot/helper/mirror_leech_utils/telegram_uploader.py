@@ -141,13 +141,13 @@ class TelegramUploader:
         self._transmission_stopped = False
 
     def _apply_prefix_suffix_simple(self, filename):
-        """Apply prefix and suffix to filename - Old Aeon-MLTB style"""
+        """Apply prefix and suffix to filename - Old Drama Cloud Bot style"""
         if not self._lprefix and not self._lsuffix:
             return filename
 
         result = filename
 
-        # Apply prefix (like old Aeon-MLTB)
+        # Apply prefix (like old Drama Cloud Bot)
         if self._lprefix:
             clean_prefix = re_sub("<.*?>", "", self._lprefix)
             if clean_prefix and not result.startswith(clean_prefix):
@@ -156,7 +156,7 @@ class TelegramUploader:
                     clean_prefix = f"{clean_prefix} "
                 result = f"{clean_prefix}{result}"
 
-        # Apply suffix (like old Aeon-MLTB)
+        # Apply suffix (like old Drama Cloud Bot)
         if self._lsuffix:
             clean_suffix = re_sub("<.*?>", "", self._lsuffix)
             if clean_suffix:
@@ -190,7 +190,7 @@ class TelegramUploader:
 
     def _build_caption_with_html_prefix_suffix(self, core_content):
         """
-        Build caption with HTML prefix and suffix around core content - Old Aeon-MLTB style.
+        Build caption with HTML prefix and suffix around core content - Old Drama Cloud Bot style.
         HTML tags are preserved for Telegram rendering.
         """
         caption = core_content
@@ -254,7 +254,7 @@ class TelegramUploader:
             else False
         )
 
-        # Use the same logic as old Aeon-MLTB for consistency
+        # Use the same logic as old Drama Cloud Bot for consistency
         self._lprefix = self._listener.user_dict.get("LEECH_FILENAME_PREFIX") or (
             Config.LEECH_FILENAME_PREFIX
             if "LEECH_FILENAME_PREFIX" not in self._listener.user_dict
@@ -292,7 +292,7 @@ class TelegramUploader:
 
     def _build_caption_with_prefix_suffix(self, core_content):
         """
-        Build caption with HTML prefix and suffix around core content - Old Aeon-MLTB style.
+        Build caption with HTML prefix and suffix around core content - Old Drama Cloud Bot style.
         Uses the new HTML-aware method for consistent behavior.
         """
         return self._build_caption_with_html_prefix_suffix(core_content)
@@ -491,7 +491,7 @@ class TelegramUploader:
                 # Set final filename for file operations
                 final_filename = working_filename
 
-            # Step 3: Apply prefix and suffix to filename - Old Aeon-MLTB style
+            # Step 3: Apply prefix and suffix to filename - Old Drama Cloud Bot style
             original_filename = final_filename
             final_filename = self._apply_prefix_suffix_simple(final_filename)
 
@@ -501,7 +501,7 @@ class TelegramUploader:
                     f"Applied prefix/suffix: {original_filename} -> {final_filename}"
                 )
 
-            # Add HTML prefix/suffix to caption for default captions - Old Aeon-MLTB style
+            # Add HTML prefix/suffix to caption for default captions - Old Drama Cloud Bot style
             if cap_mono and not has_leech_caption:
                 cap_mono = self._build_caption_with_html_prefix_suffix(cap_mono)
 
@@ -1604,7 +1604,7 @@ class TelegramUploader:
                 destinations.append(self._user_id)
         else:
             # No specific destination was specified
-            # Follow the standard destination logic based on old Aeon-MLTB requirements
+            # Follow the standard destination logic based on old Drama Cloud Bot requirements
 
             # Check if user has set their own dump
             user_dump = self._user_dump
@@ -1914,7 +1914,7 @@ class TelegramUploader:
                 destinations.append(self._user_id)
         else:
             # No specific destination was specified
-            # Follow the standard destination logic based on old Aeon-MLTB requirements
+            # Follow the standard destination logic based on old Drama Cloud Bot requirements
 
             # Check if user has set their own dump
             user_dump = self._user_dump
